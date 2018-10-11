@@ -50,8 +50,7 @@ namespace ePlusReplication
                 LogDBInfo.ConnectionString = clsDBUtility.CreateConnectionString(LogDBInfo);
                 LogDBConne = new MySqlConnection(LogDBInfo.ConnectionString);
                 LogDBConne.Open();
-                UpdateSkip(LogDBConne, ref errorMessage);
-              
+                           
             }
             catch (Exception ex)
             {
@@ -64,52 +63,47 @@ namespace ePlusReplication
             string strSql = "", str;
             MySqlCommand cmd;
             MySqlDataReader reader = null;
-            do
+          
+            str = "SELECT DBCODE,ID FROM replicationlog WHERE UPDATESTATUS = 'Failed' AND SKIP = 'No' ORDER BY DBCODE,ID LIMIT 1";
+            MySqlCommand Com = new MySqlCommand();
+            Com.Connection = conn;
+
+            try
             {
-                str = "SELECT DBCODE,ID FROM replicationlog WHERE UPDATESTATUS = 'Failed' AND SKIP = 'No' ORDER BY DBCODE,ID LIMIT 1";
-                MySqlCommand Com = new MySqlCommand();
-                Com.Connection = conn;
-
-                try
-                {
-                    Com.CommandText = str;
-                    reader = Com.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        dbCode = reader["DBCODE"].ToString();
-                        replicationID = Convert.ToUInt64(reader["ID"].ToString());
-                    }
-                    reader.Close();
-                }
-                catch (MySqlException sqlEx)
-                {
-                    errorString = sqlEx.Message;
-
-                }
-                try
-                {
-                    strSql = "UPDATE REPLICATIONLOG SET UPDATESTATUS='Pending' WHERE DBCODE = '" + dbCode + "' AND ID =" + replicationID.ToString();
-                    cmd = new MySqlCommand(strSql, conn);
-                    cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.ExecuteNonQuery();
-                }
-                catch (MySqlException e)
-                {
-                    errorString = e.Message;
-
-                }
+               Com.CommandText = str;
+               reader = Com.ExecuteReader();
+               while (reader.Read())
+               {
+                  dbCode = reader["DBCODE"].ToString();
+                  replicationID = Convert.ToUInt64(reader["ID"].ToString());
+               }
+                  reader.Close();
             }
-            while (reader.HasRows == false);
-        }
+            catch (MySqlException sqlEx)
+             {
+               errorString = sqlEx.Message;
 
+             }
+            try
+             {
+               strSql = "UPDATE REPLICATIONLOG SET UPDATESTATUS='Pending' WHERE DBCODE = '" + dbCode + "' AND ID =" + replicationID.ToString();
+               cmd = new MySqlCommand(strSql, conn);
+               cmd.CommandType = System.Data.CommandType.Text;
+               cmd.ExecuteNonQuery();
+            }
+            catch (MySqlException e)
+            {
+              errorString = e.Message;
 
+           }
+         }
         public void UpdateSkip(MySqlConnection conn,  ref string errorString)
         {
             string strSql = "",str; 
             MySqlCommand cmd;
             MySqlDataReader reader=null;
-            do
-            {
+           
+           
                 str = "SELECT DBCODE,ID FROM replicationlog WHERE UPDATESTATUS = 'Failed' AND SKIP = 'No' ORDER BY DBCODE,ID LIMIT 1";
                 MySqlCommand Com = new MySqlCommand();               
                 Com.Connection = conn;
@@ -141,10 +135,7 @@ namespace ePlusReplication
                 {
                     errorString = e.Message;
 
-                }
-            }
-            while (reader.HasRows==false);
-           
+                }           
         }
         public void closeconnection()
         {
