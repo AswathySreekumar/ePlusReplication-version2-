@@ -133,7 +133,14 @@ namespace ePlusReplication
        
         private void dgview_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-           LoadSerial();
+            DataGridView gdview = sender as DataGridView;
+            if(null!=gdview)
+            {
+                foreach(DataGridViewRow r in gdview.Rows)
+                {
+                    gdview.Rows[r.Index].HeaderCell.Value = (r.Index+1).ToString();
+                }
+            }
         }
 
         private void btnError_Click(object sender, EventArgs e)
@@ -142,22 +149,14 @@ namespace ePlusReplication
             if(MessageBox.Show(clsReplicate.pendingquery,"Pending Query",MessageBoxButtons.RetryCancel,MessageBoxIcon.None)==DialogResult.Retry)
             {               
                 xmlsettings = clsxml.ReadSettings();
-                dbconnect = new clsDBConnect(xmlsettings);              
-                
+                dbconnect = new clsDBConnect(xmlsettings);
+                dbconnect.Requeue(dbconnect.LogDBConne, ref errorMessage);
             }
             else
             {               
                 xmlsettings = clsxml.ReadSettings();
                 dbconnect = new clsDBConnect(xmlsettings);
-            }
-        }
-
-        private void LoadSerial()
-        {
-            int i = 1;
-            foreach (DataGridViewRow row in dgview.Rows)
-            {
-               row.Cells[].Value = i; i++;
+                dbconnect.UpdateSkip(dbconnect.LogDBConne, ref errorMessage);
             }
         }
         private void Form1_Load(object sender, EventArgs e)
