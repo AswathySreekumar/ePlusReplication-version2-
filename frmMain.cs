@@ -23,6 +23,7 @@ namespace ePlusReplication
         int idleTimebetweenAttempt = 1;
       
         clsReplicate Replication;
+        
         Boolean startReplication = false;
         clsXMLData xmlData;
         xmlSettings settings;

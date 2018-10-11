@@ -29,8 +29,7 @@ namespace ePlusReplication
             {
                 clsStatus.UdpateStatusText("Network not Available");
             }
-        }             
-
+        }
         public clsXMLData()
         {
             xmlPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\" + Application.ProductName;

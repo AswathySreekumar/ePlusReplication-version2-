@@ -18,7 +18,6 @@ namespace ePlusReplication
         public string ConnectionString;
         public Boolean Success;
     }
-
     public struct QueryInfo
     {
         public string DBCode;
@@ -730,7 +729,7 @@ namespace ePlusReplication
         public static string PendingQuery(MySqlConnection conn,string cmdString,ulong replicationID, ref string errorString)
         {
 
-            string strSql = "SELECT ID,COMMANDSTRING FROM replicationlog WHERE UPDATESTATUS = 'Pending' AND SKIP = 'No' ";
+            string strSql = "SELECT ID,COMMANDSTRING FROM replicationlog WHERE UPDATESTATUS = 'Failed' OR UPDATESTATUS='pending' AND SKIP = 'No' ";
             MySqlCommand Com = new MySqlCommand();
             MySqlDataReader reader;
             Com.Connection = conn;
@@ -753,6 +752,5 @@ namespace ePlusReplication
             return cmdString;
             Com.Dispose();
         }
-        
     }
 }

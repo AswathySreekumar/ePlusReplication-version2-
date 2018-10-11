@@ -33,7 +33,7 @@ namespace ePlusReplication
     {
         Form1 frm = new Form1();
         public static string pendingquery,SqlLogCommandString = "";
-        public static long Fetchvalue, Applyvalue = 0, Verifyvalue = 0;
+        public static long pendingcount,Fetchvalue, Applyvalue = 0, Verifyvalue = 0;
         protected static string cmdString;
         public Boolean mainDBConnection;
         protected DatabaseInfo MainDBInfo, LogDBInfo;
@@ -42,7 +42,7 @@ namespace ePlusReplication
         protected System.Collections.Queue replicationQueue;
         protected string errorMessage;
         protected string dbCode;
-        protected xmlSettings settings;
+        private xmlSettings settings;
         protected eMailSettings testMail;
         public clsReplicate(xmlSettings xmlsettings)
         {
@@ -238,6 +238,7 @@ namespace ePlusReplication
 
         public void verifySQL()
         {
+           
             clsStatus.UdpateStatusText("Checking for pending SQL Commands...\r\n");
             System.Threading.Thread.Sleep(500);
             Boolean result;
@@ -289,7 +290,7 @@ namespace ePlusReplication
             LogDBConn.Open();
             MainDBConn = new MySqlConnection(MainDBInfo.ConnectionString);
             MainDBConn.Open();
-            count = clsDBUtility.GetReplicationPendingCount(LogDBConn, ref errorMessage);
+            count = clsDBUtility.GetReplicationPendingCount(LogDBConn, ref errorMessage);  
             clsDBUtility.UpdateActivityLog(LogDBConn, "Checking", "Checking for Pending SQL Commands(Apply)", count.ToString() + " SQL Command(s) found.", ref errorMessage);
             clsStatus.UdpateStatusText(count.ToString() + " SQL Command(s) found.\r\n");
             if (count > 0)
@@ -318,11 +319,13 @@ namespace ePlusReplication
                             clsStatus.UdpateStatusText("Error!!! Error!!! Error!!!\r\n");
                             break;
                         }
-                        pendingquery = clsDBUtility.PendingQuery(LogDBConn,cmdString,replicationID, ref errorMessage);
+                      pendingquery = clsDBUtility.PendingQuery(LogDBConn,cmdString,replicationID, ref errorMessage);
+                       long pendingcount = clsDBUtility.GetReplicationPendingCount(LogDBConn, ref errorMessage);
                     }
                 }
                 while (replicationID > 0);
                 clsStatus.UdpateStatusText("Completed\r\n");
+               
             }
             System.Threading.Thread.Sleep(500);
             MySqlConnection.ClearPool(MainDBConn);
