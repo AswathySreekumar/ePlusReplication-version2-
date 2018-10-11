@@ -21,7 +21,6 @@ namespace ePlusReplication
         protected eMailSettings testMail;    
         protected System.Collections.Queue replicationQueue;
         protected long count;
-        clsReplicate clsRep;
         clsDBConnect dbconnect;
         public static string str;
         delegate void StringParameterDelegate(string Text);
@@ -151,12 +150,16 @@ namespace ePlusReplication
                 xmlsettings = clsxml.ReadSettings();
                 dbconnect = new clsDBConnect(xmlsettings);
                 dbconnect.Requeue(dbconnect.LogDBConne, ref errorMessage);
+                dbconnect.LogDBConne.Close();
+                dbconnect.LogDBConne.Dispose();
             }
             else
             {               
                 xmlsettings = clsxml.ReadSettings();
                 dbconnect = new clsDBConnect(xmlsettings);
                 dbconnect.UpdateSkip(dbconnect.LogDBConne, ref errorMessage);
+                dbconnect.LogDBConne.Close();
+                dbconnect.LogDBConne.Dispose();
             }
         }
         private void Form1_Load(object sender, EventArgs e)
@@ -200,7 +203,7 @@ namespace ePlusReplication
             dt.Columns.Add("Status", typeof(string));
 
             dt.Rows.Add("BR1", frmMain.lstTime, clsReplicate.Fetchvalue, clsReplicate.Verifyvalue, clsReplicate.pendingcount, frmMain.nxtTime);
-            if (clsReplicate.Fetchvalue == clsReplicate.Applyvalue)
+            if (clsReplicate.pendingcount==0)
             {
                 dt.Rows[0]["Status"] = "Success";
                 btnError.Visible = false;
@@ -227,8 +230,8 @@ namespace ePlusReplication
             dt.Columns.Add("NextReplication", typeof(DateTime));
             dt.Columns.Add("Status", typeof(string));
 
-            dt.Rows.Add("BR1", frmMain.lstTime, clsReplicate.Fetchvalue, clsReplicate.Verifyvalue, clsReplicate.Applyvalue, frmMain.nxtTime);
-            if (clsReplicate.Fetchvalue == clsReplicate.Applyvalue)
+            dt.Rows.Add("BR1", frmMain.lstTime, clsReplicate.Fetchvalue, clsReplicate.Verifyvalue, clsReplicate.pendingcount, frmMain.nxtTime);
+            if (clsReplicate.pendingcount==0)
             {
                 dt.Rows[0]["Status"] = "Success";
             }
