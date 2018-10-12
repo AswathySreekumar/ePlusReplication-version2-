@@ -32,9 +32,12 @@ namespace ePlusReplication
         public ulong replicationID;
 
         public Form1()
-        {
-           
+        {           
             InitializeComponent();
+            System.Windows.Forms.Timer updTimer = new System.Windows.Forms.Timer();
+            updTimer.Interval = 30000;
+            updTimer.Tick += new EventHandler(updTimer_Tick);
+            updTimer.start();
         }       
         public void ShowScreen()
         {
@@ -44,8 +47,6 @@ namespace ePlusReplication
                 BeginInvoke(new SplashShowCloseDelegate(ShowScreen));
                 return;
             }
-            this.Show();
-            Application.Run(this);
         }
         /// Closes the SplashScreen
         /// </summary>
@@ -100,36 +101,7 @@ namespace ePlusReplication
         {
             if (CloseSplashScreenFlag == false)
                 e.Cancel = true;
-        }          
-
-          public void UpdateGrid(long value)
-          {
-            
-            if (InvokeRequired)
-            {
-                DataTable dt = new DataTable();
-                dt.Columns.Add("Branch", typeof(string));
-                dt.Columns.Add("LastReplication", typeof(DateTime));
-                dt.Columns.Add("FetchedQuery", typeof(long));
-                dt.Columns.Add("VerifiedQuery", typeof(long));
-                dt.Columns.Add("AppliedQuery", typeof(long));
-                dt.Columns.Add("Status", typeof(string));
-
-                dt.Rows.Add("BR1", frmMain.lstTime, clsReplicate.Fetchvalue, clsReplicate.Verifyvalue, clsReplicate.Applyvalue);
-                if (clsReplicate.pendingcount==0)
-                {
-                    dt.Rows[0]["Status"] = "Success";
-                }
-                else
-                {
-                    dt.Rows[0]["Status"] = "Pending";
-                }
-                dgview.DataSource = dt;
-
-                return;
-            }           
-        }    
-       
+        }                 
         private void dgview_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             DataGridView gdview = sender as DataGridView;
@@ -141,7 +113,10 @@ namespace ePlusReplication
                 }
             }
         }
-
+        private void updTimer_Tick(object sender, EventArgs e)
+        {
+            updateGridView();
+        }
         private void btnError_Click(object sender, EventArgs e)
         {
             
@@ -164,7 +139,6 @@ namespace ePlusReplication
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-           btnAdd.Cursor = Cursors.Arrow;
             dgview.Cursor = Cursors.Arrow;
             txtStatus.Cursor = Cursors.No;
             txtDetails.Cursor = Cursors.Arrow;  
@@ -174,9 +148,7 @@ namespace ePlusReplication
            txtDetails.Enabled = true;
            txtDetails.Text = "Next Replication:"+frmMain.nxtTime+ "\r\n"+"ServerName :" + clsXMLData.Server;
            txtDetails.Text+= "\r\nPending:" +clsDBUtility.error+ "\r\n";
-        }
-
-      
+        }      
         private void dgview_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
         {
             Form1 frm = new Form1();
@@ -189,38 +161,8 @@ namespace ePlusReplication
             e.Row.Cells["NextReplication"].Value = "__/__/__  __:__:__";
             e.Row.Cells["Status"].Value = "";
         }             
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Branch", typeof(string));
-            dt.Columns.Add("LastReplication", typeof(DateTime));
-            dt.Columns.Add("FetchedQuery", typeof(long));
-            dt.Columns.Add("VerifiedQuery", typeof(long));
-            dt.Columns.Add("AppliedQuery", typeof(long));
-            dt.Columns.Add("NextReplication", typeof(DateTime));
-            dt.Columns.Add("Status", typeof(string));
-
-            dt.Rows.Add("BR1", frmMain.lstTime, clsReplicate.Fetchvalue, clsReplicate.Verifyvalue, clsReplicate.pendingcount, frmMain.nxtTime);
-            if (clsReplicate.pendingcount==0)
-            {
-                dt.Rows[0]["Status"] = "Success";
-                btnError.Visible = false;
-            }
-            else
-            {
-                dt.Rows[0]["Status"] = "Pending";
-                btnError.Visible = true;
-                
-            }
-            dgview.DataSource = dt;
-        }
-
         public void updateGridView()
-
-        {
-          
+        {   
             DataTable dt = new DataTable();
             dt.Columns.Add("Branch", typeof(string));
             dt.Columns.Add("LastReplication", typeof(DateTime));
@@ -234,10 +176,12 @@ namespace ePlusReplication
             if (clsReplicate.pendingcount==0)
             {
                 dt.Rows[0]["Status"] = "Success";
+                btnError.Enabled = false;
             }
             else
             {
                 dt.Rows[0]["Status"] = "Pending";
+                btnError.Enabled = true;
             }
             dgview.DataSource = dt;         
 
