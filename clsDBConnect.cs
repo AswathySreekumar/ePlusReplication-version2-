@@ -135,15 +135,7 @@ namespace ePlusReplication
                 {
                     errorString = e.Message;
 
-                }           
-        }
-        public void closeconnection()
-        {
-            MainDBConne.Close();
-            MainDBConne.Dispose();
-            LogDBConne.Close();
-            LogDBConne.Dispose();
-        }
-
-    }
+                }
+           }
+     }
 }

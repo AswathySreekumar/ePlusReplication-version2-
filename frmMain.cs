@@ -52,7 +52,7 @@ namespace ePlusReplication
             {
                 MessageBox.Show(ex.Message);
             }
-        }
+       }
            
         private void Relicate()
         {
@@ -85,16 +85,15 @@ namespace ePlusReplication
             clsStatus.ClearStatusText();
             lstTime = dt.ToLocalTime().ToString();
             clsStatus.UdpateStatusText("Last Replication : " + lstTime);
-             nxtTime = dt.AddMinutes(Convert.ToDouble(settings.timer)).ToLocalTime().ToString();
+            nxtTime = dt.AddMinutes(Convert.ToDouble(settings.timer)).ToLocalTime().ToString();
             clsStatus.UdpateStatusText("\r\nNext Replication : " +nxtTime + "\r\n");
-            frm.updateGridView();
             startReplication = false;
            
         }
        
         private void MyTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-          Relicate();
+            Relicate();        
         }   
    }
 

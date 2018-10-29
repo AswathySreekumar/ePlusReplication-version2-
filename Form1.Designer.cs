@@ -28,17 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgview = new System.Windows.Forms.DataGridView();
             this.txtStatus = new System.Windows.Forms.TextBox();
             this.txtDetails = new System.Windows.Forms.TextBox();
-            this.btnAdd = new System.Windows.Forms.Button();
             this.btnError = new System.Windows.Forms.Button();
+            this.updTimer = new System.Windows.Forms.Timer(this.components);
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.Branch = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LastReplication = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FetchedQuery = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -66,15 +69,16 @@
             this.dgview.Cursor = System.Windows.Forms.Cursors.WaitCursor;
             this.dgview.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgview.GridColor = System.Drawing.Color.DarkGray;
-            this.dgview.Location = new System.Drawing.Point(87, 6);
+            this.dgview.Location = new System.Drawing.Point(12, 6);
             this.dgview.MultiSelect = false;
             this.dgview.Name = "dgview";
             this.dgview.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgview.ShowEditingIcon = false;
-            this.dgview.Size = new System.Drawing.Size(845, 150);
+            this.dgview.Size = new System.Drawing.Size(1013, 150);
             this.dgview.TabIndex = 0;
             this.dgview.UseWaitCursor = true;
-            this.dgview.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgview_CellDoubleClick);
+            this.dgview.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgview_CellContentClick);
+            this.dgview.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgview_CellMouseClick);
             this.dgview.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgview_DataBindingComplete);
             this.dgview.DefaultValuesNeeded += new System.Windows.Forms.DataGridViewRowEventHandler(this.dgview_DefaultValuesNeeded);
             this.dgview.BindingContextChanged += new System.EventHandler(this.Form1_Load);
@@ -82,11 +86,12 @@
             // txtStatus
             // 
             this.txtStatus.BackColor = System.Drawing.SystemColors.Window;
-            this.txtStatus.Location = new System.Drawing.Point(87, 162);
+            this.txtStatus.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+            this.txtStatus.Location = new System.Drawing.Point(12, 162);
             this.txtStatus.Multiline = true;
             this.txtStatus.Name = "txtStatus";
             this.txtStatus.ReadOnly = true;
-            this.txtStatus.Size = new System.Drawing.Size(403, 321);
+            this.txtStatus.Size = new System.Drawing.Size(501, 321);
             this.txtStatus.TabIndex = 3;
             this.txtStatus.UseWaitCursor = true;
             // 
@@ -94,57 +99,58 @@
             // 
             this.txtDetails.BackColor = System.Drawing.SystemColors.Window;
             this.txtDetails.Cursor = System.Windows.Forms.Cursors.WaitCursor;
-            this.txtDetails.Location = new System.Drawing.Point(514, 162);
+            this.txtDetails.Location = new System.Drawing.Point(515, 162);
             this.txtDetails.Multiline = true;
             this.txtDetails.Name = "txtDetails";
             this.txtDetails.ReadOnly = true;
-            this.txtDetails.Size = new System.Drawing.Size(418, 321);
+            this.txtDetails.Size = new System.Drawing.Size(510, 321);
             this.txtDetails.TabIndex = 4;
             this.txtDetails.UseWaitCursor = true;
             // 
-            // btnAdd
-            // 
-            this.btnAdd.Cursor = System.Windows.Forms.Cursors.WaitCursor;
-            this.btnAdd.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnAdd.Location = new System.Drawing.Point(472, 133);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnAdd.TabIndex = 5;
-            this.btnAdd.Text = "Update";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.UseWaitCursor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
             // btnError
             // 
-            this.btnError.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnError.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btnError.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnError.Font = new System.Drawing.Font("Rockwell", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnError.ForeColor = System.Drawing.SystemColors.InactiveBorder;
-            this.btnError.Location = new System.Drawing.Point(831, 40);
+            this.btnError.Enabled = false;
+            this.btnError.Font = new System.Drawing.Font("Rockwell Extra Bold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnError.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.btnError.Location = new System.Drawing.Point(999, 28);
             this.btnError.Name = "btnError";
-            this.btnError.Size = new System.Drawing.Size(101, 22);
+            this.btnError.Size = new System.Drawing.Size(26, 20);
             this.btnError.TabIndex = 8;
-            this.btnError.Text = "Pending";
+            this.btnError.Text = ":";
             this.btnError.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.btnError.UseVisualStyleBackColor = false;
-            this.btnError.UseWaitCursor = true;
-            this.btnError.Visible = false;
             this.btnError.Click += new System.EventHandler(this.btnError_Click);
+            // 
+            // updTimer
+            // 
+            this.updTimer.Enabled = true;
+            this.updTimer.Interval = 30000;
+            this.updTimer.Tick += new System.EventHandler(this.updTimer_Tick);
+            // 
+            // notifyIcon
+            // 
+            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
+            this.notifyIcon.Text = "ePlus";
+            this.notifyIcon.Visible = true;
+            this.notifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseDoubleClick);
             // 
             // Branch
             // 
             this.Branch.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Branch.DataPropertyName = "Branch";
             this.Branch.HeaderText = "Branch";
+            this.Branch.MinimumWidth = 20;
             this.Branch.Name = "Branch";
             // 
             // LastReplication
             // 
             this.LastReplication.DataPropertyName = "LastReplication";
-            dataGridViewCellStyle1.Format = "G";
-            dataGridViewCellStyle1.NullValue = null;
-            this.LastReplication.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle13.Format = "G";
+            dataGridViewCellStyle13.NullValue = null;
+            this.LastReplication.DefaultCellStyle = dataGridViewCellStyle13;
             this.LastReplication.HeaderText = "Last Replication";
             this.LastReplication.Name = "LastReplication";
             this.LastReplication.Width = 120;
@@ -152,36 +158,39 @@
             // FetchedQuery
             // 
             this.FetchedQuery.DataPropertyName = "FETCHEDQUERY";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.NullValue = null;
-            this.FetchedQuery.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle14.NullValue = null;
+            this.FetchedQuery.DefaultCellStyle = dataGridViewCellStyle14;
             this.FetchedQuery.HeaderText = "Fetched Query";
             this.FetchedQuery.Name = "FetchedQuery";
+            this.FetchedQuery.Width = 140;
             // 
             // VerifiedQuery
             // 
             this.VerifiedQuery.DataPropertyName = "VERIFIEDQUERY";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.NullValue = null;
-            this.VerifiedQuery.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle15.NullValue = null;
+            this.VerifiedQuery.DefaultCellStyle = dataGridViewCellStyle15;
             this.VerifiedQuery.HeaderText = "Pending for Verification";
             this.VerifiedQuery.Name = "VerifiedQuery";
+            this.VerifiedQuery.Width = 140;
             // 
             // AppliedQuery
             // 
             this.AppliedQuery.DataPropertyName = "APPLIEDQUERY";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.NullValue = null;
-            this.AppliedQuery.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle16.NullValue = null;
+            this.AppliedQuery.DefaultCellStyle = dataGridViewCellStyle16;
             this.AppliedQuery.HeaderText = "Pending for Updation";
             this.AppliedQuery.Name = "AppliedQuery";
+            this.AppliedQuery.Width = 140;
             // 
             // NextReplication
             // 
             this.NextReplication.DataPropertyName = "NextReplication";
-            dataGridViewCellStyle5.Format = "G";
-            dataGridViewCellStyle5.NullValue = null;
-            this.NextReplication.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle17.Format = "G";
+            dataGridViewCellStyle17.NullValue = null;
+            this.NextReplication.DefaultCellStyle = dataGridViewCellStyle17;
             this.NextReplication.HeaderText = "NextReplication";
             this.NextReplication.Name = "NextReplication";
             this.NextReplication.Width = 120;
@@ -189,8 +198,8 @@
             // Status
             // 
             this.Status.DataPropertyName = "Status";
-            dataGridViewCellStyle6.NullValue = null;
-            this.Status.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle18.NullValue = null;
+            this.Status.DefaultCellStyle = dataGridViewCellStyle18;
             this.Status.HeaderText = "Status";
             this.Status.Name = "Status";
             // 
@@ -198,6 +207,7 @@
             // 
             this.button.HeaderText = "";
             this.button.Name = "button";
+            this.button.Width = 25;
             // 
             // Form1
             // 
@@ -205,16 +215,17 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(1040, 487);
+            this.ClientSize = new System.Drawing.Size(1037, 487);
             this.Controls.Add(this.btnError);
-            this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.txtDetails);
             this.Controls.Add(this.txtStatus);
             this.Controls.Add(this.dgview);
-            this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+            this.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "Form1";
-            this.UseWaitCursor = true;
+            this.ShowInTaskbar = false;
+            this.Text = "ePlus Replication";
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.dgview)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -226,8 +237,9 @@
         private System.Windows.Forms.DataGridView dgview;
         private System.Windows.Forms.TextBox txtStatus;
         private System.Windows.Forms.TextBox txtDetails;
-        private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnError;
+        private System.Windows.Forms.Timer updTimer;
+        private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.DataGridViewTextBoxColumn Branch;
         private System.Windows.Forms.DataGridViewTextBoxColumn LastReplication;
         private System.Windows.Forms.DataGridViewTextBoxColumn FetchedQuery;

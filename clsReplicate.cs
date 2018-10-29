@@ -33,7 +33,7 @@ namespace ePlusReplication
     {
         Form1 frm = new Form1();
         public static string pendingquery,SqlLogCommandString = "";
-        public static long pendingcount,Fetchvalue, Applyvalue = 0, Verifyvalue = 0;
+        public static long pendingcount,Fetchvalue, Verifyvalue = 0;
         protected static string cmdString;
         public Boolean mainDBConnection;
         protected DatabaseInfo MainDBInfo, LogDBInfo;
@@ -266,13 +266,14 @@ namespace ePlusReplication
                     }
                     clsStatus.UdpateStatusText(".");
                     if(!string.IsNullOrEmpty(query.CommandString))
-                        Verifyvalue++;
+                     //   Verifyvalue++;
                     System.Threading.Thread.Sleep(1);
                     //clsDBUtility.GetReplicationNextID(LogDBConn, ref  dbCode, ref replicationID, ref errorMessage);
                 }
                 while (replicationID > 0);
                 clsStatus.UdpateStatusText("Sql Command Verification Completed.\r\n");
                 clsDBUtility.UpdateActivityLog(LogDBConn, "StatusUpdate", "Sql Command Verification Completed", "Successfully completed", ref errorMessage);
+                Verifyvalue= clsDBUtility.GetReplicationCount(LogDBConn, ref errorMessage);
                 System.Threading.Thread.Sleep(500);
             }
         }
@@ -311,7 +312,6 @@ namespace ePlusReplication
                                 clsMail.sendEmail(testMail.fromID, testMail.fromPass, testMail.toID, "Error On Database Updation!!!", eMailBody(query));
                             }
                             clsStatus.UdpateStatusText(".");
-                            Applyvalue++;
                             System.Threading.Thread.Sleep(1);
                         }
                         else
@@ -319,8 +319,8 @@ namespace ePlusReplication
                             clsStatus.UdpateStatusText("Error!!! Error!!! Error!!!\r\n");
                             break;
                         }
-                      pendingquery = clsDBUtility.PendingQuery(LogDBConn,cmdString,replicationID, ref errorMessage);
-                       long pendingcount = clsDBUtility.GetReplicationPendingCount(LogDBConn, ref errorMessage);
+                       pendingquery = clsDBUtility.PendingQuery(LogDBConn,cmdString,replicationID, ref errorMessage);
+                       long pendingcount = clsDBUtility.GetReplicationFailedCount(LogDBConn, ref errorMessage);
                     }
                 }
                 while (replicationID > 0);

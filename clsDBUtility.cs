@@ -186,6 +186,13 @@ namespace ePlusReplication
             count = getDBLongValue(conn, strSql, ref errorString);
             return count;
         }
+        public static long GetReplicationFailedCount(MySqlConnection conn, ref string errorString)
+        {
+            long count;
+            string strSql = "SELECT COUNT(ID) FROM replicationlog WHERE COMMANDSTATUS = 'Success' AND UPDATESTATUS = 'Failed' AND SKIP = 'No'";
+            count = getDBLongValue(conn, strSql, ref errorString);
+            return count;
+        }
         public static void GetReplicationNextID(MySqlConnection conn,ref string dbCode,ref ulong nextID,ref string errorString)
         {
             string strSql = "SELECT DBCODE,ID FROM replicationlog WHERE COMMANDSTATUS = 'Pending' AND SKIP = 'No' ORDER BY DBCODE,ID LIMIT 1";
@@ -729,7 +736,7 @@ namespace ePlusReplication
         public static string PendingQuery(MySqlConnection conn,string cmdString,ulong replicationID, ref string errorString)
         {
 
-            string strSql = "SELECT ID,COMMANDSTRING FROM replicationlog WHERE UPDATESTATUS = 'Failed' OR UPDATESTATUS='pending' AND SKIP = 'No' ";
+            string strSql = "SELECT ID,COMMANDSTRING FROM replicationlog WHERE UPDATESTATUS = 'Failed' AND SKIP = 'No' ";
             MySqlCommand Com = new MySqlCommand();
             MySqlDataReader reader;
             Com.Connection = conn;
