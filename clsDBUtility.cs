@@ -32,7 +32,7 @@ namespace ePlusReplication
     
     class clsDBUtility
     {
-        public static string error;
+        public static string error="";
         public static string CreateConnectionString(DatabaseInfo dbInfo)
         {
             return "uid=" + dbInfo.DBUser + "; password="+dbInfo.DBPWD+"; host = " + dbInfo.ServerName + "; database=" + dbInfo.DBName + "; port = " + dbInfo.DBPort;
@@ -365,7 +365,7 @@ namespace ePlusReplication
         }
         public static Boolean VerifyReplicationSQL(MySqlConnection conn, string dbName, QueryInfo query, ref string errorString)
         {
-           /*string newString;
+           string newString;
             newString = updateSingleQuote(query.CommandString);
             if (newString != query.CommandString)
             {
@@ -377,7 +377,7 @@ namespace ePlusReplication
             {
                 errorString = "SQL injection attack detected";
                 return false;
-            }  */
+            }  
             if (!CheckSQLSyntax(query))
             {
                 errorString = "Syntax error";

@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ePlusReplication.exe" size="374272">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ePlusReplication.exe" size="466944">
       <assemblyIdentity name="ePlusReplication" version="1.2.1.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>+G5jE9ud6iqIq94ZQQVbDOEp4EY=</dsig:DigestValue>
+        <dsig:DigestValue>uhpS1nPJNZ/O10PKnjXkWNrvnwE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

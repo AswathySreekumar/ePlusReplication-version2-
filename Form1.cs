@@ -152,16 +152,21 @@ namespace ePlusReplication
 
         private void Form1_Resize(object sender, EventArgs e)
         {
-            if(WindowState==FormWindowState.Minimized)
-            {
-                notifyIcon.Visible = true;
-            }
+            /* if(WindowState==FormWindowState.Minimized)
+             {
+                 notifyIcon.Visible = true;
+             }   */
+            this.ShowIcon = true;
+            notifyIcon.Visible = true;
+            this.Visible = true;
         }
 
-        private void dgview_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-
+            e.Cancel = true;
         }
+
+        
 
         private void dgview_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -210,7 +215,7 @@ namespace ePlusReplication
             e.Row.Cells["Status"].Value = "";
         }             
 
-        private void btnAdd_Click(object sender, EventArgs e)
+     /*   private void btnAdd_Click(object sender, EventArgs e)
         {
 
             DataTable dt = new DataTable();
@@ -235,7 +240,7 @@ namespace ePlusReplication
                 
             }
             dgview.DataSource = dt;
-        }
+        }     */
 
         public void updateGridView()
 

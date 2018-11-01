@@ -257,7 +257,7 @@ namespace ePlusReplication
                     clsDBUtility.GetReplicationNextID(LogDBConn, ref  dbCode, ref replicationID, ref errorMessage);
                     query = clsDBUtility.GetReplicationSQL(LogDBConn,dbCode, replicationID, ref errorMessage);
                     modifyUser(query);
-                    clsDBUtility.UpdateCommandString(LogDBConn, cmdString, dbCode, replicationID, ref errorMessage);
+                    //clsDBUtility.UpdateCommandString(LogDBConn, cmdString, dbCode, replicationID, ref errorMessage);
                     result = clsDBUtility.VerifyReplicationSQL(LogDBConn, MainDBInfo.DBName, query, ref errorMessage);
                     clsDBUtility.UpdateReplicationSQL(LogDBConn, "COMMANDSTATUS",dbCode, replicationID, result, ref errorMessage);
                     if (!result)
@@ -316,17 +316,20 @@ namespace ePlusReplication
                         }
                         else
                         {
-                            clsStatus.UdpateStatusText("Error!!! Error!!! Error!!!\r\n");
+                           // clsStatus.UdpateStatusText("Error!!! Error!!! Error!!!\r\n");
                             break;
                         }
-                       pendingquery = clsDBUtility.PendingQuery(LogDBConn,cmdString,replicationID, ref errorMessage);
-                       long pendingcount = clsDBUtility.GetReplicationFailedCount(LogDBConn, ref errorMessage);
+                      
                     }
                 }
                 while (replicationID > 0);
-                clsStatus.UdpateStatusText("Completed\r\n");
                
+                clsStatus.UdpateStatusText("Completed\r\n");
+                pendingquery = clsDBUtility.PendingQuery(LogDBConn, cmdString, replicationID, ref errorMessage);
+                long pendingcount = clsDBUtility.GetReplicationFailedCount(LogDBConn, ref errorMessage);
             }
+
+           
             System.Threading.Thread.Sleep(500);
             MySqlConnection.ClearPool(MainDBConn);
             clsStatus.UdpateStatusText("Closing Master Database Connection...\r\n");
