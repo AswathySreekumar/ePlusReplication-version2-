@@ -37,7 +37,7 @@ namespace ePlusReplication
 
 			// Attach a context menu.
 			ni.ContextMenuStrip = new ContextMenus().Create();
-		}
+		}           
 
 		/// <summary>
 		/// Releases unmanaged and - optionally - managed resources

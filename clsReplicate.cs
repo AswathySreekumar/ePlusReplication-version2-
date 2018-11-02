@@ -256,8 +256,11 @@ namespace ePlusReplication
                 {
                     clsDBUtility.GetReplicationNextID(LogDBConn, ref  dbCode, ref replicationID, ref errorMessage);
                     query = clsDBUtility.GetReplicationSQL(LogDBConn,dbCode, replicationID, ref errorMessage);
-                    modifyUser(query);
-                    //clsDBUtility.UpdateCommandString(LogDBConn, cmdString, dbCode, replicationID, ref errorMessage);
+                    if (query.CommandString.StartsWith("CREATE USER")|| query.CommandString.StartsWith("GRANT ALL PRIVILEGES")|| query.CommandString.StartsWith("SET PASSWORD FOR"))
+                    {
+                        modifyUser(query);
+                        clsDBUtility.UpdateCommandString(LogDBConn, cmdString, dbCode, replicationID, ref errorMessage);
+                    }
                     result = clsDBUtility.VerifyReplicationSQL(LogDBConn, MainDBInfo.DBName, query, ref errorMessage);
                     clsDBUtility.UpdateReplicationSQL(LogDBConn, "COMMANDSTATUS",dbCode, replicationID, result, ref errorMessage);
                     if (!result)
@@ -379,7 +382,7 @@ namespace ePlusReplication
                 var instId = DBName.Substring(DBName.Length - 3);
                 string newusername = user_name.Substring(user_name.Length - 3);
                 cmdString = query.CommandString.Replace(newusername, instId);
-                
+               
             }
 
             else if (query.CommandString.StartsWith("GRANT ALL PRIVILEGES"))
@@ -412,6 +415,7 @@ namespace ePlusReplication
                 cmdString = query.CommandString.Replace(newusername, instId);
                
             }
+            //return cmdString;
         }
     }
 }
