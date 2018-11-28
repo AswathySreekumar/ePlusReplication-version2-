@@ -49,7 +49,6 @@
             this.txtDetails = new System.Windows.Forms.TextBox();
             this.btnError = new System.Windows.Forms.Button();
             this.updTimer = new System.Windows.Forms.Timer(this.components);
-            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgview)).BeginInit();
             this.SuspendLayout();
             // 
@@ -201,13 +200,6 @@
             this.updTimer.Interval = 30000;
             this.updTimer.Tick += new System.EventHandler(this.updTimer_Tick);
             // 
-            // notifyIcon
-            // 
-            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
-            this.notifyIcon.Text = "ePlus";
-            this.notifyIcon.Visible = true;
-            this.notifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseDoubleClick);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -226,7 +218,6 @@
             this.ShowInTaskbar = false;
             this.Text = "ePlus Replication";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.Resize += new System.EventHandler(this.Form1_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.dgview)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -240,7 +231,6 @@
         private System.Windows.Forms.TextBox txtDetails;
         private System.Windows.Forms.Button btnError;
         private System.Windows.Forms.Timer updTimer;
-        private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.DataGridViewTextBoxColumn Branch;
         private System.Windows.Forms.DataGridViewTextBoxColumn LastReplication;
         private System.Windows.Forms.DataGridViewTextBoxColumn FetchedQuery;

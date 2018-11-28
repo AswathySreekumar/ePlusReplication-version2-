@@ -22,7 +22,7 @@ namespace ePlusReplication
                 pi.Display();
 
                 // Make sure the application runs!
-                Application.Run(new frmMain());
+                    Application.Run(new frmMain());
 
             }
 

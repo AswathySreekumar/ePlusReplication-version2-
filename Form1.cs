@@ -10,6 +10,7 @@ namespace ePlusReplication
     
     public partial class Form1 : Form
     {
+        NotifyIcon notifyIcon = new NotifyIcon();
         public static long Fetchvalue, Applyvalue, Verifyvalue;
         clsXMLData clsxml = new clsXMLData();
         public Boolean mainDBConnection;
@@ -17,12 +18,12 @@ namespace ePlusReplication
         protected DatabaseInfo[] slaveDatabaseInfo;
         public MySqlConnection MainDBConne, slaveDatabase, LogDBConne;
         public string dbCode,errorMessage;
-        protected xmlSettings settings;
+       // protected xmlSettings settings;
         protected eMailSettings testMail;    
         protected System.Collections.Queue replicationQueue;
         protected long count;
         clsDBConnect dbconnect;
-        public static string str;
+        public static string str,brnch;
         delegate void StringParameterDelegate(string Text);
         delegate void StringClearParameterDelegate();
         delegate void SplashShowCloseDelegate();
@@ -30,6 +31,9 @@ namespace ePlusReplication
         DataTable dt = new DataTable();
         private xmlSettings xmlsettings;
         public ulong replicationID;
+      //  NotifyIcon notify = new NotifyIcon();
+
+
 
         public Form1()
         {
@@ -142,24 +146,7 @@ namespace ePlusReplication
         {
             updateGridView();
         }
-
-        private void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            Show();
-            ShowInTaskbar = false;
-            this.WindowState = FormWindowState.Normal;
-        }
-
-        private void Form1_Resize(object sender, EventArgs e)
-        {
-            /* if(WindowState==FormWindowState.Minimized)
-             {
-                 notifyIcon.Visible = true;
-             }   */
-            this.ShowIcon = true;
-            notifyIcon.Visible = true;
-            this.Visible = true;
-        }
+        
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -171,7 +158,7 @@ namespace ePlusReplication
         private void dgview_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             txtDetails.Enabled = true;
-            txtDetails.Text = "Next Replication:" + frmMain.nxtTime + "\r\n" + "ServerName :" + clsXMLData.Server;
+            txtDetails.Text = "Next Replication:" + frmMain.nxtTime + "\r\n" + "ServerName :" +clsReplicate.branchName;
             txtDetails.Text += "\r\nPending:" + clsDBUtility.error + "\r\n";
         }
 
@@ -196,8 +183,7 @@ namespace ePlusReplication
             }
         }
         private void Form1_Load(object sender, EventArgs e)
-        {
-            notifyIcon.BalloonTipText = "";
+        {          
             dgview.Cursor = Cursors.Arrow;
             txtStatus.Cursor = Cursors.No;
             txtDetails.Cursor = Cursors.Arrow;  
@@ -215,10 +201,12 @@ namespace ePlusReplication
             e.Row.Cells["Status"].Value = "";
         }             
 
-     /*   private void btnAdd_Click(object sender, EventArgs e)
-        {
+       public void updateGridView()
 
+        {
+            
             DataTable dt = new DataTable();
+            
             dt.Columns.Add("Branch", typeof(string));
             dt.Columns.Add("LastReplication", typeof(DateTime));
             dt.Columns.Add("FetchedQuery", typeof(long));
@@ -226,36 +214,19 @@ namespace ePlusReplication
             dt.Columns.Add("AppliedQuery", typeof(long));
             dt.Columns.Add("NextReplication", typeof(DateTime));
             dt.Columns.Add("Status", typeof(string));
-
-            dt.Rows.Add("BR1", frmMain.lstTime, clsReplicate.Fetchvalue, clsReplicate.Verifyvalue, clsReplicate.pendingcount, frmMain.nxtTime);
-            if (clsReplicate.pendingcount==0)
+            if(clsReplicate.branchName=="SDKServer")
             {
-                dt.Rows[0]["Status"] = "Success";
-                btnError.Visible = false;
+                brnch = "HO";
+            }
+            else if(clsReplicate.branchName=="SDK4-PC")
+            {
+                brnch = "NALO";
             }
             else
             {
-                dt.Rows[0]["Status"] = "Pending";
-                btnError.Visible = true;
-                
-            }
-            dgview.DataSource = dt;
-        }     */
-
-        public void updateGridView()
-
-        {
-          
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Branch", typeof(string));
-            dt.Columns.Add("LastReplication", typeof(DateTime));
-            dt.Columns.Add("FetchedQuery", typeof(long));
-            dt.Columns.Add("VerifiedQuery", typeof(long));
-            dt.Columns.Add("AppliedQuery", typeof(long));
-            dt.Columns.Add("NextReplication", typeof(DateTime));
-            dt.Columns.Add("Status", typeof(string));
-
-            dt.Rows.Add("BR1", frmMain.lstTime, clsReplicate.Fetchvalue, clsReplicate.Verifyvalue, clsReplicate.pendingcount, frmMain.nxtTime);
+                brnch = "BR1";
+            }     
+            dt.Rows.Add(brnch, frmMain.lstTime, clsReplicate.Fetchvalue, clsReplicate.Verifyvalue, clsReplicate.pendingcount, frmMain.nxtTime);
             if (clsReplicate.pendingcount==0)
             {
                 dt.Rows[0]["Status"] = "Success";

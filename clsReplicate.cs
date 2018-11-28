@@ -32,7 +32,7 @@ namespace ePlusReplication
     public class clsReplicate
     {
         Form1 frm = new Form1();
-        public static string pendingquery,SqlLogCommandString = "";
+        public static string pendingquery, branchName, SqlLogCommandString = "";
         public static long pendingcount,Fetchvalue, Verifyvalue = 0;
         protected static string cmdString;
         public Boolean mainDBConnection;
@@ -84,6 +84,7 @@ namespace ePlusReplication
                     System.Threading.Thread.Sleep(500);
                     return false;
                 }
+                //branchName = clsDBUtility.getBranchName(MainDBConn,dbCode);
                 clsStatus.UdpateStatusText("Successfully Connected to Master Database\r\n");
                 System.Threading.Thread.Sleep(500);
                 clsStatus.UdpateStatusText("Fetching data from Master Database\r\n");
@@ -219,6 +220,7 @@ namespace ePlusReplication
         protected MySqlConnection SlaveDB(DatabaseInfo slaveDBInfo)
         {
             MySqlConnection dbConn;
+            branchName = slaveDBInfo.ServerName;
             dbConn = new MySqlConnection(slaveDBInfo.ConnectionString);
             try
             {

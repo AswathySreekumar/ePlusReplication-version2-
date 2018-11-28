@@ -32,7 +32,7 @@ namespace ePlusReplication
     
     class clsDBUtility
     {
-        public static string error="";
+        public static string error="",brnch;
         public static string CreateConnectionString(DatabaseInfo dbInfo)
         {
             return "uid=" + dbInfo.DBUser + "; password="+dbInfo.DBPWD+"; host = " + dbInfo.ServerName + "; database=" + dbInfo.DBName + "; port = " + dbInfo.DBPort;
@@ -758,6 +758,24 @@ namespace ePlusReplication
             }
             return cmdString;
             Com.Dispose();
+        }
+        public static string getBranchName(MySqlConnection conn,string Name)
+        {
+            try { 
+            string brnch;
+            MySqlDataAdapter da = new MySqlDataAdapter();
+            MySqlCommand cmd = new MySqlCommand("SELECT BDO.BRANCHNAME(@V_CODE)", conn);
+            MySqlParameter name = new MySqlParameter("@v_code", MySqlDbType.String);
+            name.Value = Name;
+            brnch = cmd.ExecuteScalar().ToString();
+            }
+            catch(MySqlException ex)
+            {
+                string error = ex.Message;
+                return "";
+            }
+            return brnch;
+
         }
     }
 }
