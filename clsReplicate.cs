@@ -41,7 +41,7 @@ namespace ePlusReplication
         protected MySqlConnection MainDBConn, LogDBConn, slaveDatabase;
         protected System.Collections.Queue replicationQueue;
         protected string errorMessage;
-        protected string dbCode;
+        protected string dbCode,code;
         private xmlSettings settings;
         protected eMailSettings testMail;
         public clsReplicate(xmlSettings xmlsettings)
@@ -84,7 +84,8 @@ namespace ePlusReplication
                     System.Threading.Thread.Sleep(500);
                     return false;
                 }
-                //branchName = clsDBUtility.getBranchName(MainDBConn,dbCode);
+                branchName = clsDBUtility.GetBranchName(MainDBConn, dbCode,ref errorMessage);
+               // branchName = clsDBUtility.getBranchName(MainDBConn,code);
                 clsStatus.UdpateStatusText("Successfully Connected to Master Database\r\n");
                 System.Threading.Thread.Sleep(500);
                 clsStatus.UdpateStatusText("Fetching data from Master Database\r\n");
@@ -220,7 +221,7 @@ namespace ePlusReplication
         protected MySqlConnection SlaveDB(DatabaseInfo slaveDBInfo)
         {
             MySqlConnection dbConn;
-            branchName = slaveDBInfo.ServerName;
+         //   branchName = slaveDBInfo.ServerName;
             dbConn = new MySqlConnection(slaveDBInfo.ConnectionString);
             try
             {

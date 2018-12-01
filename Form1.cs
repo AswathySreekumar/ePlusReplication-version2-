@@ -142,6 +142,21 @@ namespace ePlusReplication
             }
         }
 
+        private void dgview_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+
+        }
+
+       private void Form1_Resize(object sender, EventArgs e)
+        {
+            if(WindowState==FormWindowState.Minimized)
+            {
+                this.ShowInTaskbar = false;
+                notifyIcon.Visible = true;
+                this.Visible = false;
+            }
+        }
+
         private void updTimer_Tick(object sender, EventArgs e)
         {
             updateGridView();
@@ -214,7 +229,7 @@ namespace ePlusReplication
             dt.Columns.Add("AppliedQuery", typeof(long));
             dt.Columns.Add("NextReplication", typeof(DateTime));
             dt.Columns.Add("Status", typeof(string));
-            if(clsReplicate.branchName=="SDKServer")
+         /*   if(clsReplicate.branchName=="SDKServer")
             {
                 brnch = "HO";
             }
@@ -225,8 +240,8 @@ namespace ePlusReplication
             else
             {
                 brnch = "BR1";
-            }     
-            dt.Rows.Add(brnch, frmMain.lstTime, clsReplicate.Fetchvalue, clsReplicate.Verifyvalue, clsReplicate.pendingcount, frmMain.nxtTime);
+            }     */
+            dt.Rows.Add(clsReplicate.branchName, frmMain.lstTime, clsReplicate.Fetchvalue, clsReplicate.Verifyvalue, clsReplicate.pendingcount, frmMain.nxtTime);
             if (clsReplicate.pendingcount==0)
             {
                 dt.Rows[0]["Status"] = "Success";

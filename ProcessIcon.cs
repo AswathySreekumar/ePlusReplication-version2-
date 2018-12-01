@@ -31,7 +31,7 @@ namespace ePlusReplication
 		public void Display()
 		{
 			// Put the icon in the system tray and allow it react to mouse clicks.			
-		//	ni.MouseClick += new MouseEventHandler(ni_MouseClick);
+			ni.MouseClick += new MouseEventHandler(ni_MouseClick);
             ni.Icon = Resources.ePluAgent;
 			ni.Text = "ePlus";
 			ni.Visible = true;
@@ -59,16 +59,14 @@ namespace ePlusReplication
 			// Handle mouse button clicks.
 			if (e.Button == MouseButtons.Left)
 			{
+                
                 // Start Windows Explorer.
-
-                if (flag == 1)
-                {
-                    //Process.Start("explorer", null);
                     Process.Start("ePlusReplication", null);
-                    flag = 0;
+                    
+                   
                 }
                     
 			}
 		}
-	}
+	
 }

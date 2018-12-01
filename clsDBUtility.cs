@@ -759,6 +759,30 @@ namespace ePlusReplication
             return cmdString;
             Com.Dispose();
         }
+        public static string GetBranchName(MySqlConnection conn, string code, ref string errorString)
+        {
+            string branch="";
+            string strSql = "SELECT BRCODE FROM databasemapping WHERE DBCODE !=" + code;
+            MySqlCommand com = new MySqlCommand();
+            MySqlDataReader reader;
+            com.Connection = conn;
+            try
+            {
+                com.CommandText = strSql;
+                reader = com.ExecuteReader();
+                while(reader.Read())
+                {
+                    branch = reader["BRCODE"].ToString();
+                }
+                reader.Close();
+            }
+            catch(MySqlException ex)
+            {
+                errorString = ex.Message;
+            }
+            return branch;
+            com.Dispose();
+        }
         public static string getBranchName(MySqlConnection conn,string Name)
         {
             try { 

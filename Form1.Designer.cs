@@ -77,6 +77,7 @@
             this.dgview.TabIndex = 0;
             this.dgview.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgview_CellMouseClick);
             this.dgview.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgview_DataBindingComplete);
+            this.dgview.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgview_DataError);
             this.dgview.DefaultValuesNeeded += new System.Windows.Forms.DataGridViewRowEventHandler(this.dgview_DefaultValuesNeeded);
             this.dgview.BindingContextChanged += new System.EventHandler(this.Form1_Load);
             // 
@@ -218,6 +219,7 @@
             this.ShowInTaskbar = false;
             this.Text = "ePlus Replication";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+           this.Resize += new System.EventHandler(this.Form1_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.dgview)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

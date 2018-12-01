@@ -1,85 +1,16 @@
-D:\Milestone Toolkit\Aswathy\New folder\ePlusReplication\ePlusReplication\bin\Debug\ePlusReplication.exe.config
-D:\Milestone Toolkit\Aswathy\New folder\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.exe
-D:\Milestone Toolkit\Aswathy\New folder\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.pdb
-D:\Milestone Toolkit\Aswathy\New folder\ePlusReplication\ePlusReplication\bin\Debug\ePlusReplication.exe.manifest
-D:\Milestone Toolkit\Aswathy\New folder\ePlusReplication\ePlusReplication\bin\Debug\ePlusReplication.application
-D:\Milestone Toolkit\Aswathy\New folder\ePlusReplication\ePlusReplication\bin\Debug\ePlusReplication.exe
-D:\Milestone Toolkit\Aswathy\New folder\ePlusReplication\ePlusReplication\bin\Debug\ePlusReplication.pdb
-D:\Milestone Toolkit\Aswathy\New folder\ePlusReplication\ePlusReplication\bin\Debug\MySql.Data.dll
-D:\Milestone Toolkit\Aswathy\New folder\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.csprojResolveAssemblyReference.cache
-D:\Milestone Toolkit\Aswathy\New folder\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.frmMain.resources
-D:\Milestone Toolkit\Aswathy\New folder\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.frmAbout.resources
-D:\Milestone Toolkit\Aswathy\New folder\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.Properties.Resources.resources
-D:\Milestone Toolkit\Aswathy\New folder\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.frmStatus.resources
-D:\Milestone Toolkit\Aswathy\New folder\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.csproj.GenerateResource.Cache
-D:\Milestone Toolkit\Aswathy\New folder\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.exe.manifest
-D:\Milestone Toolkit\Aswathy\New folder\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.application
-D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\bin\Debug\ePlusReplication.exe.config
-D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.exe
-D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.pdb
-D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.csprojResolveAssemblyReference.cache
-D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.Form1.resources
-D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.frmMain.resources
-D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.frmAbout.resources
-D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.Properties.Resources.resources
-D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.frmStatus.resources
-D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.csproj.GenerateResource.Cache
-D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\bin\Debug\ePlusReplication.exe.manifest
-D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\bin\Debug\ePlusReplication.application
-D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\bin\Debug\ePlusReplication.exe
-D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\bin\Debug\ePlusReplication.pdb
-D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\bin\Debug\MySql.Data.dll
-D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.exe.manifest
-D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.application
-D:\Milestone Toolkit\Aswathy\Project\New folder\ePlusReplication\ePlusReplication\bin\Debug\ePlusReplication.exe.config
-D:\Milestone Toolkit\Aswathy\Project\New folder\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.exe
-D:\Milestone Toolkit\Aswathy\Project\New folder\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.pdb
-D:\Milestone Toolkit\Aswathy\Project\New folder\ePlusReplication\ePlusReplication\bin\Debug\ePlusReplication.exe.manifest
-D:\Milestone Toolkit\Aswathy\Project\New folder\ePlusReplication\ePlusReplication\bin\Debug\ePlusReplication.application
-D:\Milestone Toolkit\Aswathy\Project\New folder\ePlusReplication\ePlusReplication\bin\Debug\ePlusReplication.exe
-D:\Milestone Toolkit\Aswathy\Project\New folder\ePlusReplication\ePlusReplication\bin\Debug\ePlusReplication.pdb
-D:\Milestone Toolkit\Aswathy\Project\New folder\ePlusReplication\ePlusReplication\bin\Debug\MySql.Data.dll
-D:\Milestone Toolkit\Aswathy\Project\New folder\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.csprojResolveAssemblyReference.cache
-D:\Milestone Toolkit\Aswathy\Project\New folder\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.Form1.resources
-D:\Milestone Toolkit\Aswathy\Project\New folder\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.frmMain.resources
-D:\Milestone Toolkit\Aswathy\Project\New folder\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.frmAbout.resources
-D:\Milestone Toolkit\Aswathy\Project\New folder\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.Properties.Resources.resources
-D:\Milestone Toolkit\Aswathy\Project\New folder\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.frmStatus.resources
-D:\Milestone Toolkit\Aswathy\Project\New folder\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.csproj.GenerateResource.Cache
-D:\Milestone Toolkit\Aswathy\Project\New folder\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.exe.manifest
-D:\Milestone Toolkit\Aswathy\Project\New folder\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.application
-D:\Milestone Toolkit\Aswathy\Project\working\ePlusReplication\ePlusReplication\bin\Debug\ePlusReplication.exe.config
-D:\Milestone Toolkit\Aswathy\Project\working\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.exe
-D:\Milestone Toolkit\Aswathy\Project\working\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.pdb
-D:\Milestone Toolkit\Aswathy\Project\working\ePlusReplication\ePlusReplication\bin\Debug\ePlusReplication.exe.manifest
-D:\Milestone Toolkit\Aswathy\Project\working\ePlusReplication\ePlusReplication\bin\Debug\ePlusReplication.application
-D:\Milestone Toolkit\Aswathy\Project\working\ePlusReplication\ePlusReplication\bin\Debug\ePlusReplication.exe
-D:\Milestone Toolkit\Aswathy\Project\working\ePlusReplication\ePlusReplication\bin\Debug\ePlusReplication.pdb
-D:\Milestone Toolkit\Aswathy\Project\working\ePlusReplication\ePlusReplication\bin\Debug\MySql.Data.dll
-D:\Milestone Toolkit\Aswathy\Project\working\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.csprojResolveAssemblyReference.cache
-D:\Milestone Toolkit\Aswathy\Project\working\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.Form1.resources
-D:\Milestone Toolkit\Aswathy\Project\working\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.frmMain.resources
-D:\Milestone Toolkit\Aswathy\Project\working\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.frmAbout.resources
-D:\Milestone Toolkit\Aswathy\Project\working\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.Properties.Resources.resources
-D:\Milestone Toolkit\Aswathy\Project\working\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.csproj.GenerateResource.Cache
-D:\Milestone Toolkit\Aswathy\Project\working\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.exe.manifest
-D:\Milestone Toolkit\Aswathy\Project\working\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.application
-\\mserver\Milestone Toolkit\Aswathy\Project\working\ePlusReplication\ePlusReplication\bin\Debug\ePlusReplication.exe.config
-\\mserver\Milestone Toolkit\Aswathy\Project\working\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.exe
-\\mserver\Milestone Toolkit\Aswathy\Project\working\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.pdb
 D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\ePlusReplication\bin\Debug\ePlusReplication.exe.config
-D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.exe
-D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.pdb
 D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\ePlusReplication\bin\Debug\ePlusReplication.exe.manifest
 D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\ePlusReplication\bin\Debug\ePlusReplication.application
 D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\ePlusReplication\bin\Debug\ePlusReplication.exe
-D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\ePlusReplication\bin\Debug\ePlusReplication.pdb
 D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\ePlusReplication\bin\Debug\MySql.Data.dll
-D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.csprojResolveAssemblyReference.cache
+D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.Form1.resources
 D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.frmMain.resources
 D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.frmAbout.resources
 D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.Properties.Resources.resources
 D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.csproj.GenerateResource.Cache
 D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.exe.manifest
 D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.application
-D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.Form1.resources
+D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.exe
+D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.pdb
+D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\ePlusReplication\bin\Debug\ePlusReplication.pdb
+D:\Milestone Toolkit\Aswathy\Project\ePlusReplication\ePlusReplication\ePlusReplication\obj\x86\Debug\ePlusReplication.csprojResolveAssemblyReference.cache
