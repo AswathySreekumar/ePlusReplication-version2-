@@ -138,8 +138,8 @@ namespace ePlusReplication
             int index = e.RowIndex;
             txtDetails.Enabled = true;
             txtDetails.Text = "Next Replication:" + frmMain.nxtTime + "\r\n"+ "Branch :" + clsReplicate.BranchName[index];
-            if(clsDBUtility.error!="")
-             txtDetails.Text += "\r\nPending:" + clsDBUtility.error + "\r\n";
+            if(clsDBUtility.error !="")
+             txtDetails.Text += "\r\nPending:" + clsDBUtility.error  + "\r\n";
             i++;
             
         }

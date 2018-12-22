@@ -32,7 +32,7 @@ namespace ePlusReplication
     
     class clsDBUtility
     {
-        public static string error="",brnch;
+        public static string error ="",brnch;
         public static string CreateConnectionString(DatabaseInfo dbInfo)
         {
             return "uid=" + dbInfo.DBUser + "; password="+dbInfo.DBPWD+"; host = " + dbInfo.ServerName + "; database=" + dbInfo.DBName + "; port = " + dbInfo.DBPort;
@@ -889,7 +889,7 @@ namespace ePlusReplication
             }
             catch(MySqlException ex)
             {
-                string error = ex.Message;
+                string Error = ex.Message;
                 return "";
             }
             return brnch;
