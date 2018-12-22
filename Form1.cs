@@ -18,6 +18,7 @@ namespace ePlusReplication
         protected DatabaseInfo[] slaveDatabaseInfo;
         public MySqlConnection MainDBConne, slaveDatabase, LogDBConne;
         public string dbCode,errorMessage;
+        public string[] Error;
        // protected xmlSettings settings;
         protected eMailSettings testMail;    
         protected System.Collections.Queue replicationQueue;
@@ -101,35 +102,7 @@ namespace ePlusReplication
             if (CloseSplashScreenFlag == false)
                 e.Cancel = true;
         }       
-         public void UpdateGrid(long value)
-          {
-            
-            if (InvokeRequired)
-            {
-                DataTable dt = new DataTable();
-                dt.Columns.Add("Branch", typeof(string));
-                dt.Columns.Add("LastReplication", typeof(DateTime));
-                dt.Columns.Add("FetchedQuery", typeof(long));
-                dt.Columns.Add("VerifiedQuery", typeof(long));
-                dt.Columns.Add("AppliedQuery", typeof(long));
-                dt.Columns.Add("Status", typeof(string));
-
-                dt.Rows.Add("BR1", frmMain.lstTime, clsReplicate.Fetchvalue, clsReplicate.Verifyvalue, clsReplicate.pendingcount);
-                if (clsReplicate.pendingcount==0)
-                {
-                    dt.Rows[0]["Status"] = "Success";
-                    btnError.Enabled = false;
-                }
-                else
-                {
-                    dt.Rows[0]["Status"] = "Pending";
-                    btnError.Enabled = true;
-                }
-                dgview.DataSource = dt;
-
-                return;
-            }           
-        }           
+         
         private void dgview_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             DataGridView gdview = sender as DataGridView;
@@ -157,9 +130,46 @@ namespace ePlusReplication
             }
         }
 
+        private void dgview_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int i = 0;
+            dgview.Rows[dgview.SelectedCells[i].RowIndex].Selected = true;
+            //Error[i] = clsDBUtility.error;
+            int index = e.RowIndex;
+            txtDetails.Enabled = true;
+            txtDetails.Text = "Next Replication:" + frmMain.nxtTime + "\r\n"+ "Branch :" + clsReplicate.BranchName[index];
+            if(clsDBUtility.error!="")
+             txtDetails.Text += "\r\nPending:" + clsDBUtility.error + "\r\n";
+            i++;
+            
+        }
+
+        private void dgview_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (MessageBox.Show(clsReplicate.pendingquery, "Pending Query", MessageBoxButtons.RetryCancel, MessageBoxIcon.None) == DialogResult.Retry)
+            {
+                xmlsettings = clsxml.ReadSettings();
+                dbconnect = new clsDBConnect(xmlsettings);
+                dbconnect.Requeue(dbconnect.LogDBConne, ref errorMessage);
+                dbconnect.LogDBConne.Close();
+                dbconnect.LogDBConne.Dispose();
+
+            }
+            else
+            {
+                xmlsettings = clsxml.ReadSettings();
+                dbconnect = new clsDBConnect(xmlsettings);
+                dbconnect.UpdateSkip(dbconnect.LogDBConne, ref errorMessage);
+                dbconnect.LogDBConne.Close();
+                dbconnect.LogDBConne.Dispose();
+            }
+
+        }
+
         private void updTimer_Tick(object sender, EventArgs e)
         {
-            updateGridView();
+            int size = clsReplicate.BranchName.Length;
+            updateGridView(size);
         }
         
 
@@ -167,16 +177,6 @@ namespace ePlusReplication
         {
             e.Cancel = true;
         }
-
-        
-
-        private void dgview_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            txtDetails.Enabled = true;
-            txtDetails.Text = "Next Replication:" + frmMain.nxtTime + "\r\n" + "ServerName :" +clsReplicate.branchName;
-            txtDetails.Text += "\r\nPending:" + clsDBUtility.error + "\r\n";
-        }
-
         private void btnError_Click(object sender, EventArgs e)
         {            
             if(MessageBox.Show(clsReplicate.pendingquery,"Pending Query",MessageBoxButtons.RetryCancel,MessageBoxIcon.None)==DialogResult.Retry)
@@ -205,7 +205,7 @@ namespace ePlusReplication
         }
         private void dgview_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
         {
-            Form1 frm = new Form1();
+      /*      Form1 frm = new Form1();
             clsxml.ReadSettings();   
             e.Row.Cells["Branch"].Value = "BR1";
             e.Row.Cells["LastReplication"].Value =DateTime.Now ;
@@ -213,10 +213,10 @@ namespace ePlusReplication
             e.Row.Cells["VerifiedQuery"].Value = Verifyvalue;
             e.Row.Cells["AppliedQuery"].Value = Applyvalue;
             e.Row.Cells["NextReplication"].Value = "__/__/__  __:__:__";
-            e.Row.Cells["Status"].Value = "";
+            e.Row.Cells["Status"].Value = "";      */
         }             
 
-       public void updateGridView()
+       public void updateGridView(int size)
 
         {
             
@@ -229,31 +229,45 @@ namespace ePlusReplication
             dt.Columns.Add("AppliedQuery", typeof(long));
             dt.Columns.Add("NextReplication", typeof(DateTime));
             dt.Columns.Add("Status", typeof(string));
-         /*   if(clsReplicate.branchName=="SDKServer")
+            /*   if(clsReplicate.branchName=="SDKServer")
+               {
+                   brnch = "HO";
+               }
+               else if(clsReplicate.branchName=="SDK4-PC")
+               {
+                   brnch = "NALO";
+               }
+               else
+               {
+                   brnch = "BR1";
+               }     */
+            /*  DataTable dt2 = new DataTable();
+              dt2 = clsReplicate.branchName;
+              // dt2.Columns.Add("Branch", typeof(string));
+              dt2.Rows.Add();
+              dgview.DataSource = dt2;       */
+            for (int i = 0; i < size; i++)
             {
-                brnch = "HO";
-            }
-            else if(clsReplicate.branchName=="SDK4-PC")
-            {
-                brnch = "NALO";
-            }
-            else
-            {
-                brnch = "BR1";
-            }     */
-            dt.Rows.Add(clsReplicate.branchName, frmMain.lstTime, clsReplicate.Fetchvalue, clsReplicate.Verifyvalue, clsReplicate.pendingcount, frmMain.nxtTime);
-            if (clsReplicate.pendingcount==0)
-            {
-                dt.Rows[0]["Status"] = "Success";
-                btnError.Enabled = false;
-            }
-            else
-            {
-                dt.Rows[0]["Status"] = "Pending";
-                btnError.Enabled = true;
-            }
-            dgview.DataSource = dt;         
+                dt.Rows.Add(clsReplicate.BranchName[i], frmMain.lstTime, clsReplicate.Fetchvalue, clsReplicate.Verifyvalue, clsReplicate.pendingcount, frmMain.nxtTime);
+                if (clsDBUtility.error=="")
+                {
+                    dt.Rows[i]["Status"] = "Success";
 
+                }
+                else
+                {
+                    dt.Rows[i]["Status"] = "Pending";
+                    
+
+                }
+              dgview.DataSource = dt;
+            }
+
+           
+
+         //   DataTable dtmerged = MergeTables(dt,dt2);
+        /*    dt2.Merge(dt);
+            dt2.AcceptChanges();       */
         }
     }
 }

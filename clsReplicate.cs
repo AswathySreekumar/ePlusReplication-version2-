@@ -32,8 +32,10 @@ namespace ePlusReplication
     public class clsReplicate
     {
         Form1 frm = new Form1();
-        public static string pendingquery, branchName, SqlLogCommandString = "";
-        public static long pendingcount,Fetchvalue, Verifyvalue = 0;
+        public int COUNT = 0;
+        public static string pendingquery, branchName, brnchName,SqlLogCommandString = "";
+        public static long pendingcount, Fetchvalue, Verifyvalue;
+        public static string[] BranchName;
         protected static string cmdString;
         public Boolean mainDBConnection;
         protected DatabaseInfo MainDBInfo, LogDBInfo;
@@ -84,7 +86,9 @@ namespace ePlusReplication
                     System.Threading.Thread.Sleep(500);
                     return false;
                 }
-                branchName = clsDBUtility.GetBranchName(MainDBConn, dbCode,ref errorMessage);
+                BranchName = clsDBUtility.GetBranchName(MainDBConn, dbCode,ref errorMessage);
+               // branchName = clsDBUtility.getBranchName(MainDBConn, brnchName);
+               // string[] brnchName = branchName;
                // branchName = clsDBUtility.getBranchName(MainDBConn,code);
                 clsStatus.UdpateStatusText("Successfully Connected to Master Database\r\n");
                 System.Threading.Thread.Sleep(500);
@@ -185,8 +189,8 @@ namespace ePlusReplication
                             continue;
                         lastID = getReplicateLastID(slaveDatabaseInfo[i].DBCode);
                         clsDBUtility.GetReplicationLog(slaveDatabase, lastID, replicationQueue, ref errorMessage);
-                        clsStatus.UdpateStatusText(replicationQueue.Count.ToString() + " Update(s) found on slave database\r\n");
-                        Fetchvalue += replicationQueue.Count;
+                        clsStatus.UdpateStatusText(replicationQueue.Count.ToString() + " Update(s) found on slave database\r\n");                    
+                        Fetchvalue = replicationQueue.Count;
                         clsDBUtility.UpdateActivityLog(LogDBConn, "SELECT", "Check for SQL Commands(" + slaveDatabaseInfo[i].DBName + "@" + slaveDatabaseInfo[i].ServerName + ":" + slaveDatabaseInfo[i].DBPort + ")...", replicationQueue.Count.ToString() + " Update(s) found on slave database", ref errorMessage);
                         clsDBUtility.UpdateConnectionInfo(LogDBConn, slaveDatabaseInfo[i].DBCode, ref errorMessage);
                         MySqlConnection.ClearPool(slaveDatabase);
@@ -279,7 +283,9 @@ namespace ePlusReplication
                 while (replicationID > 0);
                 clsStatus.UdpateStatusText("Sql Command Verification Completed.\r\n");
                 clsDBUtility.UpdateActivityLog(LogDBConn, "StatusUpdate", "Sql Command Verification Completed", "Successfully completed", ref errorMessage);
-                Verifyvalue= clsDBUtility.GetReplicationCount(LogDBConn, ref errorMessage);
+                
+                Verifyvalue = clsDBUtility.GetReplicationCount(LogDBConn, ref errorMessage);
+                COUNT++;
                 System.Threading.Thread.Sleep(500);
             }
         }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MySql.Data.MySqlClient;
-
+using System.Data;
 
 namespace ePlusReplication
 {
@@ -759,38 +759,132 @@ namespace ePlusReplication
             return cmdString;
             Com.Dispose();
         }
-        public static string GetBranchName(MySqlConnection conn, string code, ref string errorString)
+        public static string[] GetBranchName(MySqlConnection conn, string code, ref string errorString)
         {
-            string branch="";
-            string strSql = "SELECT BRCODE FROM databasemapping WHERE DBCODE !=" + code;
+            
+            string[] branch=new string[10];
+            int i;
+            long count=0;
+            string strSql = "SELECT COUNT(BRCODE) FROM databasemapping WHERE DBCODE !=" + code;
             MySqlCommand com = new MySqlCommand();
             MySqlDataReader reader;
             com.Connection = conn;
             try
             {
-                com.CommandText = strSql;
-                reader = com.ExecuteReader();
-                while(reader.Read())
-                {
-                    branch = reader["BRCODE"].ToString();
-                }
-                reader.Close();
+                com.CommandText = strSql;               
+                
+                    count = (long)com.ExecuteScalar();
+                
             }
-            catch(MySqlException ex)
+            catch (MySqlException ex)
             {
                 errorString = ex.Message;
             }
+            strSql = "SELECT BRCODE FROM databasemapping WHERE DBCODE !=" + code + " ORDER BY DBCODE ASC";
+            com = new MySqlCommand(strSql, conn);
+            //conn.Open();            
+           // conn.Close();           
+           // MySqlDataReader reader;
+            com.Connection = conn;
+            MySqlDataAdapter sqlda = new MySqlDataAdapter();
+            DataTable dt = new DataTable();
+            sqlda.SelectCommand = com;
+            sqlda.Fill(dt);
+            if(dt!=null && dt.Rows.Count>0)
+            {
+                for(i=0;i<count;i++)
+                {
+                    branch[i] = dt.Rows[i]["BRCODE"].ToString();
+                }
+            }
+            branch= branch.Where(x => !string.IsNullOrEmpty(x)).ToArray();
+            /*      try
+                  {
+                      com.CommandText = strSql; 
+                      reader = com.ExecuteReader();
+
+                      while(reader.Read())
+                      {                    
+                              branch = reader["BRCODE"].ToString();
+                      }
+                      reader.Close();
+
+                  }
+                  catch(MySqlException ex)
+                  {
+                      errorString = ex.Message;
+                  }              */
             return branch;
             com.Dispose();
         }
+
+     /*   public static DataTable GetBranchName(MySqlConnection conn, string code, ref string errorString)
+        {
+            DataTable dt = new DataTable();
+            string[] branch = new string[10];
+            long count = 0;
+            string strSql = "SELECT COUNT(BRCODE) FROM databasemapping WHERE DBCODE !=" + code;
+            MySqlCommand com = new MySqlCommand();
+            //MySqlDataReader reader;
+            com.Connection = conn;
+            try
+            {
+                com.CommandText = strSql;
+
+                count = (long)com.ExecuteScalar();
+
+            }
+            catch (MySqlException ex)
+            {
+                errorString = ex.Message;
+            }
+            strSql = "SELECT BRCODE AS Branch FROM databasemapping WHERE DBCODE !=" + code;
+            com = new MySqlCommand(strSql, conn);
+            // conn.Open();
+            MySqlDataAdapter da = new MySqlDataAdapter(com);
+            da.Fill(dt);
+            // conn.Close();
+            da.Dispose();
+            //MySqlDataReader reader;
+                com.Connection = conn;
+                try
+                {
+                    com.CommandText = strSql; 
+                    reader = com.ExecuteReader();
+
+                    while(reader.Read())
+                    {
+                        for (int i = 0; i < count; i++)
+                        {
+                            branch[i] = reader["BRCODE"].ToString();
+
+                        }
+                    }
+                    reader.Close();
+
+                }
+                catch(MySqlException ex)
+                {
+                    errorString = ex.Message;
+                }  
+            return dt;
+            com.Dispose();
+        }            */
         public static string getBranchName(MySqlConnection conn,string Name)
         {
             try { 
             string brnch;
-            MySqlDataAdapter da = new MySqlDataAdapter();
-            MySqlCommand cmd = new MySqlCommand("SELECT BDO.BRANCHNAME(@V_CODE)", conn);
-            MySqlParameter name = new MySqlParameter("@v_code", MySqlDbType.String);
-            name.Value = Name;
+                DataTable dt = new DataTable();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+            MySqlCommand cmd = new MySqlCommand("BRANCHNAME", conn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                // MySqlParameter name = new MySqlParameter("@v_code", Name);
+                //name.Value = Name;
+                cmd.Parameters.AddWithValue("@v_code", Name);
+                cmd.Parameters["@v_code"].Direction = ParameterDirection.ReturnValue;
+                
+               
+
             brnch = cmd.ExecuteScalar().ToString();
             }
             catch(MySqlException ex)
