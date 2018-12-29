@@ -190,7 +190,7 @@ namespace ePlusReplication
                         lastID = getReplicateLastID(slaveDatabaseInfo[i].DBCode);
                         clsDBUtility.GetReplicationLog(slaveDatabase, lastID, replicationQueue, ref errorMessage);
                         clsStatus.UdpateStatusText(replicationQueue.Count.ToString() + " Update(s) found on slave database\r\n");                    
-                        Fetchvalue = replicationQueue.Count;
+                        Fetchvalue+= replicationQueue.Count;
                         clsDBUtility.UpdateActivityLog(LogDBConn, "SELECT", "Check for SQL Commands(" + slaveDatabaseInfo[i].DBName + "@" + slaveDatabaseInfo[i].ServerName + ":" + slaveDatabaseInfo[i].DBPort + ")...", replicationQueue.Count.ToString() + " Update(s) found on slave database", ref errorMessage);
                         clsDBUtility.UpdateConnectionInfo(LogDBConn, slaveDatabaseInfo[i].DBCode, ref errorMessage);
                         MySqlConnection.ClearPool(slaveDatabase);
@@ -284,7 +284,7 @@ namespace ePlusReplication
                 clsStatus.UdpateStatusText("Sql Command Verification Completed.\r\n");
                 clsDBUtility.UpdateActivityLog(LogDBConn, "StatusUpdate", "Sql Command Verification Completed", "Successfully completed", ref errorMessage);
                 
-                Verifyvalue = clsDBUtility.GetReplicationCount(LogDBConn, ref errorMessage);
+                Verifyvalue+= clsDBUtility.GetReplicationCount(LogDBConn, ref errorMessage);
                 COUNT++;
                 System.Threading.Thread.Sleep(500);
             }

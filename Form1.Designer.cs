@@ -38,9 +38,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.dgview = new System.Windows.Forms.DataGridView();
-            this.txtStatus = new System.Windows.Forms.TextBox();
-            this.txtDetails = new System.Windows.Forms.TextBox();
-            this.updTimer = new System.Windows.Forms.Timer(this.components);
             this.Branch = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LastReplication = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FetchedQuery = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,6 +46,9 @@
             this.NextReplication = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.txtStatus = new System.Windows.Forms.TextBox();
+            this.txtDetails = new System.Windows.Forms.TextBox();
+            this.updTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgview)).BeginInit();
             this.SuspendLayout();
             // 
@@ -84,37 +84,6 @@
             this.dgview.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgview_DataError);
             this.dgview.DefaultValuesNeeded += new System.Windows.Forms.DataGridViewRowEventHandler(this.dgview_DefaultValuesNeeded);
             this.dgview.BindingContextChanged += new System.EventHandler(this.Form1_Load);
-            // 
-            // txtStatus
-            // 
-            this.txtStatus.BackColor = System.Drawing.SystemColors.Window;
-            this.txtStatus.Cursor = System.Windows.Forms.Cursors.WaitCursor;
-            this.txtStatus.Location = new System.Drawing.Point(3, 136);
-            this.txtStatus.Multiline = true;
-            this.txtStatus.Name = "txtStatus";
-            this.txtStatus.ReadOnly = true;
-            this.txtStatus.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtStatus.Size = new System.Drawing.Size(463, 310);
-            this.txtStatus.TabIndex = 3;
-            this.txtStatus.UseWaitCursor = true;
-            // 
-            // txtDetails
-            // 
-            this.txtDetails.BackColor = System.Drawing.SystemColors.Window;
-            this.txtDetails.Cursor = System.Windows.Forms.Cursors.WaitCursor;
-            this.txtDetails.Location = new System.Drawing.Point(472, 136);
-            this.txtDetails.Multiline = true;
-            this.txtDetails.Name = "txtDetails";
-            this.txtDetails.ReadOnly = true;
-            this.txtDetails.Size = new System.Drawing.Size(450, 310);
-            this.txtDetails.TabIndex = 4;
-            this.txtDetails.UseWaitCursor = true;
-            // 
-            // updTimer
-            // 
-            this.updTimer.Enabled = true;
-            this.updTimer.Interval = 30000;
-            this.updTimer.Tick += new System.EventHandler(this.updTimer_Tick);
             // 
             // Branch
             // 
@@ -205,6 +174,37 @@
             this.button.UseColumnTextForButtonValue = true;
             this.button.Width = 25;
             // 
+            // txtStatus
+            // 
+            this.txtStatus.BackColor = System.Drawing.SystemColors.Window;
+            this.txtStatus.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+            this.txtStatus.Location = new System.Drawing.Point(3, 136);
+            this.txtStatus.Multiline = true;
+            this.txtStatus.Name = "txtStatus";
+            this.txtStatus.ReadOnly = true;
+            this.txtStatus.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtStatus.Size = new System.Drawing.Size(463, 310);
+            this.txtStatus.TabIndex = 3;
+            this.txtStatus.UseWaitCursor = true;
+            // 
+            // txtDetails
+            // 
+            this.txtDetails.BackColor = System.Drawing.SystemColors.Window;
+            this.txtDetails.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+            this.txtDetails.Location = new System.Drawing.Point(472, 136);
+            this.txtDetails.Multiline = true;
+            this.txtDetails.Name = "txtDetails";
+            this.txtDetails.ReadOnly = true;
+            this.txtDetails.Size = new System.Drawing.Size(450, 310);
+            this.txtDetails.TabIndex = 4;
+            this.txtDetails.UseWaitCursor = true;
+            // 
+            // updTimer
+            // 
+            this.updTimer.Enabled = true;
+            this.updTimer.Interval = 30000;
+            this.updTimer.Tick += new System.EventHandler(this.updTimer_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -219,7 +219,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Form1";
-            this.ShowInTaskbar = false;
             this.Text = "ePlus Replication";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Resize += new System.EventHandler(this.Form1_Resize);

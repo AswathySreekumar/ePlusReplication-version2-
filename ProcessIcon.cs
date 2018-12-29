@@ -10,11 +10,12 @@ namespace ePlusReplication
 	/// </summary>
 	class ProcessIcon : IDisposable
 	{
-		/// <summary>
-		/// The NotifyIcon object.
-		/// </summary>
+        /// <summary>
+        /// The NotifyIcon object.
+        /// </summary>
+        Form1 frm = new Form1();
 		NotifyIcon ni;
-        int flag = 1;
+        public static bool flag;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ProcessIcon"/> class.
@@ -56,17 +57,22 @@ namespace ePlusReplication
 		/// <param name="e">The <see cref="System.Windows.Forms.MouseEventArgs"/> instance containing the event data.</param>
 		void ni_MouseClick(object sender, MouseEventArgs e)
 		{
-			// Handle mouse button clicks.
-			if (e.Button == MouseButtons.Left)
-			{
-                
-                // Start Windows Explorer.
-                    Process.Start("ePlusReplication", null);
+            // Handle mouse button clicks.
+            if (e.Button == MouseButtons.Left)
+            {
+                // if(FormWindowState.Minimized==true)
+
+                if (flag==true)
+                {
+                    // Start Windows Explorer.
+                    //Process.GetCurrentProcess();
+                    Process.Start("explorer", null);
                     
-                   
+                    
                 }
+            }  
                     
-			}
-		}
+         }
+     }
 	
 }

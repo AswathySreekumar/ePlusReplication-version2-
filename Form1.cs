@@ -124,10 +124,12 @@ namespace ePlusReplication
         {
             if(WindowState==FormWindowState.Minimized)
             {
-                this.ShowInTaskbar = false;
+                ProcessIcon.flag = true;
+                this.ShowInTaskbar = true;
                 notifyIcon.Visible = true;
-                this.Visible = false;
+                this.Visible = true;
             }
+         
         }
 
         private void dgview_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -139,7 +141,7 @@ namespace ePlusReplication
             txtDetails.Enabled = true;
             txtDetails.Text = "Next Replication:" + frmMain.nxtTime + "\r\n"+ "Branch :" + clsReplicate.BranchName[index];
             if(clsDBUtility.error !="")
-             txtDetails.Text += "\r\nPending:" + clsDBUtility.error  + "\r\n";
+             txtDetails.Text += "\r\nPending:" + clsDBUtility.error + "\r\n";
             i++;
             
         }
